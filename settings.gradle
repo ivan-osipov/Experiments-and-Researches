@@ -1,0 +1,3 @@
+rootProject.name = 'Experiments and Researches'
+include 'Genetics'
+
