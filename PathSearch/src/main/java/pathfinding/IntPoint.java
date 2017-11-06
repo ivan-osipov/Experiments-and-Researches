@@ -39,4 +39,8 @@ public class IntPoint {
     public static IntPoint of(int x, int y) {
         return new IntPoint(x, y);
     }
+
+    public double distanceTo(IntPoint point) {
+        return Math.hypot(x - point.getX(), y - point.getY());
+    }
 }

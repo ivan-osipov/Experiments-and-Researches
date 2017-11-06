@@ -2,21 +2,28 @@ package map;
 
 import pathfinding.IntPoint;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Grid {
 
     private int width;
     private int height;
     private Set<IntPoint> barriers;
+    private Map<IntPoint, Integer> movementCosts;
+    private int defaultCost;
 
-    public Grid(int width, int height) {
+    public Grid(int width, int height, int defaultCost) {
         this.width = width;
         this.height = height;
         this.barriers = new HashSet<>();
+        this.movementCosts = new HashMap<>();
+        this.defaultCost = defaultCost;
+    }
+
+    public Grid(int width, int height) {
+        this(width, height, 1);
     }
 
     public void addBarriers(IntPoint... barriers) {
@@ -26,6 +33,17 @@ public class Grid {
     public void addBarriers(Collection<IntPoint> barriers) {
         this.barriers.addAll(barriers);
     }
+
+    public void addPointCosts(int cost, Collection<IntPoint> points) {
+        for (IntPoint point : points) {
+            this.movementCosts.put(point, cost);
+        }
+    }
+
+    public void addPointCost(int cost, IntPoint point) {
+        this.movementCosts.put(point, cost);
+    }
+
 
     public boolean inBounds(IntPoint point) {
         int x = point.getX();
@@ -41,12 +59,29 @@ public class Grid {
         int x = point.getX();
         int y = point.getY();
         Set<IntPoint> results = new HashSet<>();
-        for (IntPoint potentialNeighbor : Arrays.asList(IntPoint.of(x + 1, y), IntPoint.of(x, y - 1), IntPoint.of(x - 1, y), IntPoint.of(x, y + 1))) {
+        List<IntPoint> neighbors = Arrays.asList(
+                IntPoint.of(x + 1, y),
+                IntPoint.of(x, y - 1),
+                IntPoint.of(x - 1, y),
+                IntPoint.of(x, y + 1),
+                IntPoint.of(x + 1, y + 1),
+                IntPoint.of(x - 1, y + 1),
+                IntPoint.of(x - 1, y - 1),
+                IntPoint.of(x + 1, y - 1));
+        for (IntPoint potentialNeighbor : neighbors) {
             if(inBounds(potentialNeighbor) && isPassable(potentialNeighbor)) {
                 results.add(potentialNeighbor);
             }
         }
         return results;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public Set<IntPoint> getPassablePoints() {
@@ -64,4 +99,7 @@ public class Grid {
     }
 
 
+    public int getCost(IntPoint point) {
+        return movementCosts.getOrDefault(point, defaultCost);
+    }
 }

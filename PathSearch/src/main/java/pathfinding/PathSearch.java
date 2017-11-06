@@ -6,18 +6,18 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public interface PathSearch<T> {
+public interface PathSearch<GRAPH> {
 
-    Map<T, T> search(Graph<T> graph, T start, Predicate<T> stopCondition);
+    Map<IntPoint, IntPoint> search(GRAPH graph, IntPoint start, Predicate<IntPoint> stopCondition);
 
-    default Map<T, T> search(Graph<T> graph, T start, T finish) {
+    default Map<IntPoint, IntPoint> search(GRAPH graph, IntPoint start, IntPoint finish) {
         return search(graph, start, (point) -> Objects.equals(point, finish));
     }
 
-    default List<T> searchPath(Graph<T> graph, T start, T finish) {
-        Map<T, T> map = search(graph, start, finish);
-        LinkedList<T> path = new LinkedList<>();
-        T current = finish;
+    default List<IntPoint> searchPath(GRAPH graph, IntPoint start, IntPoint finish) {
+        Map<IntPoint, IntPoint> map = search(graph, start, finish);
+        LinkedList<IntPoint> path = new LinkedList<>();
+        IntPoint current = finish;
         do {
             path.addLast(current);
             current = map.get(current);

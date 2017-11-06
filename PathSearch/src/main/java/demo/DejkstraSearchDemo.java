@@ -7,24 +7,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BFSearchDemo extends PathSearchDemo {
+public class DejkstraSearchDemo extends PathSearchDemo {
 
     public static void main(String[] args) {
-        runDemoAlgorithm(new BFSearch());
-    }
-
-    private static void runDemoAlgorithm(PathSearch<Graph> algorithm) {
         Grid grid = makeMap();
-        Graph graph = new GraphBuilder(grid).buildSimple();
+
+        WeighedGraph<IntPoint> graph = new GraphBuilder(grid).buildWeighted();
 
         IntPoint startPoint = IntPoint.of(5, 15);
         IntPoint finishPoint = IntPoint.of(85, 15);
 
         long time = System.currentTimeMillis();
-        List<IntPoint> bestPath = algorithm.searchPath(graph, startPoint, finishPoint);
-        System.out.println((System.currentTimeMillis() - time));
+        List<IntPoint> bestPath = new DejkstraSearch().searchPath(graph, startPoint, finishPoint);
+        System.out.println(System.currentTimeMillis() - time);
         Set<IntPoint> usedPoints = new HashSet<>(bestPath);
-
         for (int y = 0; y < grid.getHeight(); y++) {
             for (int x = 0; x < grid.getWidth(); x++) {
                 IntPoint point = IntPoint.of(x, y);
@@ -37,6 +33,8 @@ public class BFSearchDemo extends PathSearchDemo {
                     pointChar = 'E';
                 } else if(usedPoints.contains(point)) {
                     pointChar = '-';
+                } else if(grid.getCost(point) > 1) {
+                    pointChar = Character.forDigit(grid.getCost(point), 10);
                 }
                 System.out.print(pointChar);
             }

@@ -2,38 +2,34 @@ package pathfinding;
 
 import java.util.*;
 
-public class Graph<T> {
+public class Graph {
 
-    private Map<T, Set<T>> edges;
+    private Map<IntPoint, Set<IntPoint>> edges;
 
     public Graph() {
         edges = new HashMap<>();
     }
 
-    public void addEdges(T first, T second, T...tail) {
-        List<T> neighbors = Arrays.asList(tail);
+    public void addEdges(IntPoint first, IntPoint second, IntPoint...tail) {
+        List<IntPoint> neighbors = Arrays.asList(tail);
         neighbors.add(second);
         addEdges(first, neighbors);
-        for (T neighbor : neighbors) {
+        for (IntPoint neighbor : neighbors) {
             addEdges(neighbor, first);
         }
     }
 
-    public void addEdges(T first, Collection<T> neighbors) {
-        Set<T> existedNeighbors = edges.computeIfAbsent(first, (key) -> new HashSet<>());
+    public void addEdges(IntPoint first, Collection<IntPoint> neighbors) {
+        Set<IntPoint> existedNeighbors = edges.computeIfAbsent(first, (key) -> new HashSet<>());
         existedNeighbors.addAll(neighbors);
     }
 
-    public void addEdges(T first, T other) {
-        Set<T> existedNeighbors = edges.computeIfAbsent(first, (key) -> new HashSet<>());
+    public void addEdges(IntPoint first, IntPoint other) {
+        Set<IntPoint> existedNeighbors = edges.computeIfAbsent(first, (key) -> new HashSet<>());
         existedNeighbors.add(other);
     }
 
-    public void optimizeSize() {
-        edges = new HashMap<>(edges);
-    }
-
-    public Set<T> fetchNeighbors(T currentPoint) {
+    public Set<IntPoint> fetchNeighbors(IntPoint currentPoint) {
         return edges.get(currentPoint);
     }
 }
