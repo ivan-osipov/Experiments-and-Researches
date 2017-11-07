@@ -1,4 +1,6 @@
-package pathfinding;
+package graph;
+
+import map.IntPoint;
 
 import java.util.*;
 

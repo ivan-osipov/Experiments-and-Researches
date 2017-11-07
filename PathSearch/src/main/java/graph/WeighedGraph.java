@@ -1,4 +1,4 @@
-package pathfinding;
+package graph;
 
 import java.util.*;
 import java.util.function.Function;

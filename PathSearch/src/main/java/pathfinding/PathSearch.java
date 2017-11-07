@@ -1,5 +1,7 @@
 package pathfinding;
 
+import map.IntPoint;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

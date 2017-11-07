@@ -1,7 +1,7 @@
 package demo;
 
 import map.Grid;
-import pathfinding.IntPoint;
+import map.IntPoint;
 
 import java.util.HashSet;
 import java.util.Set;

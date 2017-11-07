@@ -1,5 +1,8 @@
 package pathfinding;
 
+import graph.WeighedGraph;
+import map.IntPoint;
+
 public class PathComplexity implements Comparable<PathComplexity> {
     private WeighedGraph<IntPoint>.Node node;
     private int length;

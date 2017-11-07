@@ -1,6 +1,7 @@
-package pathfinding;
+package graph;
 
 import map.Grid;
+import map.IntPoint;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package pathfinding;
+package map;
 
 public class IntPoint {
 

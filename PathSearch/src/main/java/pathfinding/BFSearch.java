@@ -1,5 +1,8 @@
 package pathfinding;
 
+import graph.Graph;
+import map.IntPoint;
+
 import java.util.*;
 import java.util.function.Predicate;
 

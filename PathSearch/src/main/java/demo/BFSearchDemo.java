@@ -1,6 +1,9 @@
 package demo;
 
+import graph.Graph;
+import graph.GraphBuilder;
 import map.Grid;
+import map.IntPoint;
 import pathfinding.*;
 
 import java.util.HashSet;
