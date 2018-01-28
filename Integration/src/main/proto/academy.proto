@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package academy;
+
+option java_package = "ru.i_osipov.academy";
+option java_outer_classname = "AcademyProtos";
+
+message Student {
+    required string name = 1;
+    optional int32 id = 2;
+    repeated string email = 3;
+    optional Gender gender = 4 [default = MALE];
+
+    enum Gender {
+        MALE = 0;
+        FEMALE = 1;
+    }
+}
+
+message Group {
+    required string name = 1;
+    repeated Student student = 2;
+}

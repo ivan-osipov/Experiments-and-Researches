@@ -1,3 +1,3 @@
 rootProject.name = 'Experiments and Researches'
-include 'Genetics','PathSearch'
+include 'Genetics','PathSearch', 'Integration'
 

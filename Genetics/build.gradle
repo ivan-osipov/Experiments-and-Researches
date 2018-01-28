@@ -1,17 +1,3 @@
-group 'ivan-osipov'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compile (
-            'io.jenetics:jenetics:3.8.0'
-    )
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile ('io.jenetics:jenetics:3.8.0')
 }
